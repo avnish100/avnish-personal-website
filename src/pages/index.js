@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { graphql,Link } from 'gatsby';
 import SpotifyAlbums from '../components/spotifyAlbums';
 const IndexPage = ({data}) => (
+  
   <Layout>
 
     <Content>
@@ -16,11 +17,17 @@ const IndexPage = ({data}) => (
         <h3>Archives:</h3>
         <ul>
           {data.allMarkdownRemark.edges.map(({ node }) => (
-            <li key={node.id}>
-              <Link to={node.fields.slug}>
-                {node.frontmatter.title} [{node.frontmatter.tags.join(', ')}]
-              </Link>
-            </li>
+            <ArchiveItem key={node.id} as="a" href={node.fields.slug}>
+            <ArchiveContent>
+              <ArchiveTitle>{node.frontmatter.title}</ArchiveTitle>
+              <ArchiveTags>
+                {node.frontmatter.tags.map((tag, index) => (
+                  <ArchiveTag key={index}>{tag}</ArchiveTag>
+                ))}
+              </ArchiveTags>
+            </ArchiveContent>
+            <ArchiveDate>{node.frontmatter.date}</ArchiveDate>
+          </ArchiveItem>
           ))}
         </ul>
       </Archives>
@@ -61,6 +68,53 @@ const Archives = styled.div`
     h3{
     font-weight: normal;}
 `;
+const ArchiveItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 0px;
+  border-bottom: 1px solid white;
+  text-decoration: none;
+  color: inherit;
+  transition: border-radius 0.5s ease, color 0.5s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: 8px;
+    color:#808080;
+  }
+`;
+
+const ArchiveContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ArchiveTitle = styled.h2`
+  margin: 0;
+  font-size: 1.25em;
+`;
+
+const ArchiveTags = styled.div`
+  margin-top: 5px;
+`;
+
+const ArchiveTag = styled.span`
+  display: inline-block;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color:#d8644c;
+`;
+
+const ArchiveDate = styled.div`
+  white-space: nowrap;
+  color: #666;
+  font-size: 0.85em;
+`;
 
 export const query = graphql`
   query {
@@ -70,6 +124,7 @@ export const query = graphql`
           id
           frontmatter {
             title
+            date(formatString: "MMMM DD, YYYY")
             tags
           }
           fields {

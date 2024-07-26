@@ -27,7 +27,7 @@ const getRecentlyPlayed = async () => {
   const token = await getAccessToken();
   const response = await axios({
     method: 'get',
-    url: 'https://api.spotify.com/v1/me/player/recently-played?limit=9',
+    url: 'https://api.spotify.com/v1/me/player/recently-played?limit=8',
     headers: {
       Authorization: `Bearer ${token}`,
     },
