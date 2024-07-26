@@ -37,7 +37,6 @@ const IndexPage = ({data}) => (
 
 const Content = styled.div`
   text-align: left;
-  margin-left:60px;
 `;
 
 const Intro = styled.div`

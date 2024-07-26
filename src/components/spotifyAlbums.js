@@ -19,7 +19,7 @@ const SpotifyAlbums = () => {
 
   return (
     <div>
-      <h4 style={{textAlign:'left',marginLeft:'0px'}}>Music</h4>
+      <h4 style={{textAlign:'left'}}>Music</h4>
     <Gallery>
       
       {data.allSpotifyAlbum.nodes.map(album => (
@@ -37,19 +37,34 @@ const SpotifyAlbums = () => {
 };
 
 const Gallery = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 `;
 
 const Album = styled.div`
-  margin: 5px;
-  text-align: center;
+  width: 100%;
+  padding-bottom: 100%; // To maintain aspect ratio
+  position: relative;
+
   img {
-    width: 150px;
-    height: 150px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
   }
   
 `;
