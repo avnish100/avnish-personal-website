@@ -192,33 +192,27 @@ const Layout = ({ children }) => {
       <FooterContent>
         <FooterLinks>
           <FooterLink
-            href="https://twitter.com/yourprofile"
+            href="https://twitter.com/avnisharyanjha"
             target="_blank"
             rel="noopener noreferrer"
           >
             Twitter
           </FooterLink>
           <FooterLink
-            href="https://linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/avnish-jha-875ba120b/"
             target="_blank"
             rel="noopener noreferrer"
           >
             LinkedIn
           </FooterLink>
           <FooterLink
-            href="https://github.com/yourprofile"
+            href="https://github.com/avnish100"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
           </FooterLink>
-          <FooterLink
-            href="https://instagram.com/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram
-          </FooterLink>
+          
         </FooterLinks>
         <FooterText>
          v{new Date().getFullYear()}.2     Avnish Jha.
