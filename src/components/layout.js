@@ -1,114 +1,233 @@
 import React from 'react';
-import { Link } from 'gatsby';
-import "../styles/variables.css";
-import GlobalStyle from '../styles/GlobalStyle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faGithub} from '@fortawesome/fontawesome-free'
-
+import { Link, useStaticQuery, graphql } from 'gatsby';
+import { useLocation } from '@reach/router';
 import styled from 'styled-components';
-const Layout = ({ children }) => (
-  <div id="root">
-  <GlobalStyle/>
-  <Container>
-    <Header>
-      <Nav>
-      <NavLink to="/">Avnish Jha</NavLink>
-        <NavLink to="/writing" activeClassName='active'>Writing</NavLink>
-        <NavLink to="/projects" activeClassName='active'>Projects</NavLink>
-        <NavLink to="/photos" activeClassName='active'>Photos</NavLink>
-      </Nav>
-      <NavRight style={{textAlign:'right'}}>
-      <NavLink to="https://github.com/avnish100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill="#808080" height="20px"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></NavLink>
-      <NavLink to="https://www.linkedin.com/in/avnish-jha-875ba120b/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#808080" height="20px"><path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg></NavLink>
-      </NavRight>
-    </Header>
-    <Main>{children}</Main>
-    <Footer>
-      <p>Avnish Jha | v2024.1</p>
-    </Footer>
-  </Container>
-  </div>
-);
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-around;
-  align-items: left;
-  padding: 1rem;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    justify-content: left;
-  }
-`;
-
-const NavRight = styled.nav`
-  display: flex;
-  text-align:right;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    display:none;
-  }
-`;
+import './layout.module.css'; // Assuming you have a root CSS file for global styles
+import GlobalStyle from '../styles/GlobalStyle.js'
+import ArrowIcon from './ArrowIcon.js';
+import { StaticImage } from 'gatsby-plugin-image';
+import '../styles/variables.css'
 const Container = styled.div`
-  
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-    max-width: 80vw;
-
-    @media (max-width:760px){
-    max-width:90vw}
-    
-  
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 0 20px;
+  min-height:100vh;
+  text-align: center;
 `;
 
-const Header = styled.header`
-  width: 100%;
+const ProfileImage = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: rotate(-10deg);
+  margin-bottom: 20px;
+`;
+
+const NavLinks = styled.nav`
+  margin: 20px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: left;
-  padding: 20px;
-      color:grey;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(18, 18, 18, 1),rgba(18, 18, 18,1),rgba(18, 18, 18, 1),rgba(18, 18, 18, 0.8),rgba(18, 18, 18, 0));
+  position: sticky;
+  top: ${props => (props.isHomePage ? '0' : '10px')};
+  left: ${props => (props.isHomePage ? '0' : '10px')};
+  justify-content: ${props => (props.isHomePage ? 'center' : 'flex-start')};
+  --translate-distance: 10px;
 
 `;
 
 const NavLink = styled(Link)`
-  margin: 0 10px;
+ margin: 0 15px;
   text-decoration: none;
-  color: #808080;
-  border-radius:5px;
-  padding:5px;
+  color: var(--text-color-secondary);
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -25px; /* Adjust spacing from the text */
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(142, 160, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &:hover {
-    color:#ccc;
+    color: var(--highlight-color);
     
   }
-    svg{
-    &:hover{
-    fill:white}}
-  &.active {
-    background-color: #404040;
-    color:#ccc;
+
+  &:hover::after {
+    opacity: 1;
   }
+  &::activeFirst{
+    display:none;
+  }
+
+  svg {
+    position: absolute;
+    right: -25px; /* Adjust spacing from the text */
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover svg
+ {
+    opacity: 1;
+  }
+
+   
   
-
 `;
 
-const Main = styled.main`
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  padding: 20px;
+const Content = styled.div`
+  text-align: left;
+  margin-top: 40px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
 `;
+const FooterContainer = styled.footer`
 
-const Footer = styled.footer`
-  padding: 10px;
+  color: #fff;
   text-align: center;
-`;
+  width: 100%;
+  position: static;
+  bottom: 0;
+  left: 0;
+  padding: 10px 0;
+  height: 60px; /* Make sure this matches the LayoutContainer's padding-bottom */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+ 
+`
+
+const FooterContent = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
+`
+
+const FooterLinks = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  
+`
+
+const FooterLink = styled.a`
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #ffcc00; /* Add a hover color effect if you like */
+  }
+`
+
+const FooterText = styled.p`
+  font-size: 0.875rem;
+    color: var(--text-color-secondary);
+
+`
+
+
+const Layout = ({ children }) => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     site {
+  //       siteMetadata {
+  //         profileImage
+  //       }
+  //     }
+  //   }
+  // `);
+
+  // const profileImage = data.site.siteMetadata.profileImage;
+
+  return (
+    <div>
+      <GlobalStyle/>
+    <Container>
+      {isHomePage && <StaticImage
+      src="https://pbs.twimg.com/profile_images/1822997090118623233/AG-a48wO_400x400.jpg"
+      alt="A dinosaur"
+      placeholder="blurred"
+      layout="fixed"
+      width = {150}
+      height={150}
+      objectFit="cover"
+      style = {{marginLeft:"350px"}}
+      imgStyle={{borderRadius: "50%",
+        objectFit: "cover",
+      
+        marginBottom: "20px"}}
+      
+    />}
+      <NavLinks isHomePage={isHomePage}>
+      <NavLink to="/" activeClassName="activeFirst" className='nav-link'>Home<ArrowIcon/></NavLink>
+        <NavLink to="/writing" activeClassName="active" className='nav-link'>Writing <ArrowIcon/></NavLink>
+        <NavLink to="/projects" activeClassName="active" className="nav-link">Projects<ArrowIcon/></NavLink>
+        <NavLink to="/photos" activeClassName="active" className="nav-link">Photos<ArrowIcon/></NavLink>
+      </NavLinks>
+      <Content>
+        {children}
+      </Content>
+      <FooterContainer>
+      <FooterContent>
+        <FooterLinks>
+          <FooterLink
+            href="https://twitter.com/yourprofile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </FooterLink>
+          <FooterLink
+            href="https://linkedin.com/in/yourprofile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </FooterLink>
+          <FooterLink
+            href="https://github.com/yourprofile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </FooterLink>
+          <FooterLink
+            href="https://instagram.com/yourprofile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </FooterLink>
+        </FooterLinks>
+        <FooterText>
+         v{new Date().getFullYear()}.2     Avnish Jha.
+        </FooterText>
+      </FooterContent></FooterContainer>
+    </Container>
+    </div>
+
+  );
+};
 
 export default Layout;

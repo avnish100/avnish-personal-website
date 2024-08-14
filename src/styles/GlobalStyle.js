@@ -6,9 +6,9 @@ const GlobalStyle = createGlobalStyle`
   }
   html {
     margin: 0;  
-    background-color: black;
-    font-family : Söhne, Inter, sans serif;
-    color:white;
+    background-color: var(--background-color);
+    color:var(--text-color-primary);
+    font-family: 'Switzer-Semibold', 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 `
 

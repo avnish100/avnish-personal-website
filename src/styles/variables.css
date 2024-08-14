@@ -1,6 +1,40 @@
 :root {
-    --secondary-color:"#808080";
-    --highlight-color:"#ccc";
-    background-color: black;
-    font-family: 'PP Neue Montreal', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+    --background-color: white;
+    --text-color-primary: #000;
+    --text-color-secondary:#979797;
+    -text-color-accent:#8ea0ff;
+    --highlight-color:#8ea0ff;
+    --secondary-font: 'Switzer-Regular', 'Open Sans', 'Helvetica Neue', sans-serif;/* Keep the same or change as needed */
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #121212;
+      --text-color-primary: #e0e0e0;
+      --link-color: #bb86fc;
+      --highlight-color:#bb86fc;; /* Keep the same or change as needed */
+      --nav-background: #1f1f1f;
+      --nav-text-color: #e0e0e0;
+    }
+  }
+  
+@font-face {
+    font-family: 'Switzer-Semibold';
+    src: url('../fonts/Switzer-Semibold.woff2') format('woff2'),
+         url('../fonts/Switzer-Semibold.woff') format('woff'),
+         url('../fonts/Switzer-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Switzer-Regular';
+    src: url('../fonts/Switzer-Regular.woff2') format('woff2'),
+         url('../fonts/Switzer-Regular.woff') format('woff'),
+         url('../fonts/Switzer-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }

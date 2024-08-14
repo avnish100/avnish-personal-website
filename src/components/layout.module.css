@@ -23,3 +23,32 @@
   .nav-link-text {
     color: black;
   }
+  /* Define a variable for the translation distance */
+  :root {
+    --translate-distance: 10px;
+  }
+  
+  .nav-link:hover ~ .nav-link {
+    transform: translateX(var(--translate-distance));
+  }
+  
+  .nav-link:nth-child(1):hover {
+    transform: translateX(- var(--translate-distance));
+  }
+  
+  .nav-link:nth-child(1):hover ~ .nav-link {
+    transform: translateX(var(--translate-distance));
+  }
+  
+  .nav-link:nth-child(2):hover {
+    transform: translateX(-var(--translate-distance));
+  }
+  
+  .nav-link:nth-child(2):hover ~ .nav-link:nth-child(3) {
+    transform: translateX(var(--translate-distance));
+  }
+  
+  .nav-link:nth-child(3):hover,
+  .nav-link:nth-child(3):hover ~ .nav-link {
+    transform: translateX(-var(--translate-distance));
+  }

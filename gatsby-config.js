@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`,
   },
   plugins: [
+    'gatsby-plugin-image',
     'gatsby-plugin-styled-components','gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     {
@@ -15,9 +16,16 @@ module.exports = {
         path: `${__dirname}/src/content/blog`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`, // Ensure this matches your images directory path
+      },
+    },
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
+    
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -28,8 +36,15 @@ module.exports = {
               maxWidth: 800,
             },
           }
-  ],
-},
-},
+          ],
+        },
+      },
+      {
+        resolve: 'gatsby-plugin-sharp',
+        options:{
+          defaults:{
+          backgroundColor: 'transparent',}
+        }
+      }
   ]
 }
