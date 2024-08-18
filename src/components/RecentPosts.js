@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import * as styles from './RecentPosts.module.css'
+import * as styles from './recentposts.module.css'
 
 const RecentPosts = ({ posts }) => (
     <div className={styles.postListContainer}>

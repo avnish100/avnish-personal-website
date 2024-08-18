@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import * as styles from './TagPills.module.css'
+import * as styles from './tagpills.module.css'
 
 const TagPills = ({ tags, selectedTag }) => (
   <div className={styles.tagPillsContainer}>
