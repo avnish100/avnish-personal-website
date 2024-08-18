@@ -1,75 +1,59 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import Layout from '../components/layout';
-import WritingLayout from '../components/WritingLayout';
-import styled from 'styled-components';
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/layout'
+import TagPills from '../components/TagPills'
+import PostList from '../components/RecentPosts'
+import * as styles from './writing.module.css'
+import RecentPosts from '../components/RecentPosts'
 
-const PostList = styled.div`
-  margin-bottom: 20px;
-`;
+const WritingPage = ({ data, location }) => {
+  const posts = data.allMarkdownRemark.edges
+  const tags = data.allMarkdownRemark.group
+  const [selectedTag, setSelectedTag] = React.useState(null)
 
-const PostItem = styled.div`
-  margin-bottom: 20px;
-  padding: 20px;
- 
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  React.useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const tag = params.get('tag')
+    setSelectedTag(tag)
+  }, [location.search])
 
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-    font-weight: bold;
-  }
-
-  p {
-    margin: 0;
-  }
-`;
-
-const WritingPage = ({ data }) => {
-  const posts = data.allMarkdownRemark.edges;
+  const filteredPosts = selectedTag
+    ? posts.filter(({ node }) => node.frontmatter.tags.includes(selectedTag))
+    : posts
 
   return (
     <Layout>
-      <WritingLayout posts={posts}>
-        <h1>Writing</h1>
-        <PostList>
-          {posts.map(({ node }) => (
-            <PostItem key={node.frontmatter.slug}>
-              <a href={node.fields.slug}>
-                <p>{node.frontmatter.title}</p>
-                <p>{node.frontmatter.date}</p>
-                
-              </a>
-            </PostItem>
-          ))}
-        </PostList>
-      </WritingLayout>
+      <div className={styles.writingContainer}>
+        <h1 className={styles.pageTitle}>Writing</h1>
+        <TagPills tags={tags} selectedTag={selectedTag} />
+        <RecentPosts posts={filteredPosts} />
+      </div>
     </Layout>
-  );
-};
+  )
+}
+
+export default WritingPage
 
 export const query = graphql`
-  query WritingPageQuery {
+  query {
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
-            
+            tags
           }
-          fields{
-          slug}
-          
+          fields {
+            slug
+          }
+          excerpt
         }
+      }
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
       }
     }
   }
-`;
-
-export default WritingPage;
+`

@@ -66,3 +66,70 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
     createNode(node);
   });
 };
+
+
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === 'MarkdownRemark') {
+    const slug = createFilePath({ node, getNode, basePath: 'pages' })
+    createNodeField({
+      node,
+      name: 'slug',
+      value: `/writing${slug}`,
+    })
+  }
+}
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+  const result = await graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              tags
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const posts = result.data.allMarkdownRemark.edges
+  const tagTemplate = path.resolve('src/templates/tag.js')
+
+  // Create individual post pages
+  posts.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve('src/templates/blog-post.js'),
+      context: {
+        slug: node.fields.slug,
+      },
+    })
+  })
+
+  // Create tag pages
+  let tags = []
+  posts.forEach(edge => {
+    if (edge.node.frontmatter.tags) {
+      tags = tags.concat(edge.node.frontmatter.tags)
+    }
+  })
+  tags = [...new Set(tags)]
+
+  tags.forEach(tag => {
+    createPage({
+      path: `/tags/${tag}/`,
+      component: tagTemplate,
+      context: {
+        tag,
+      },
+    })
+  })
+}

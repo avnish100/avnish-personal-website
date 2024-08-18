@@ -11,7 +11,7 @@ const PhotoGallery = () =>{
             id
             name
             childImageSharp{
-                gatsbyImageData(layout: CONSTRAINED width:300 aspectRatio:1.5  transformOptions:{fit:CONTAIN})}}
+                gatsbyImageData(layout: CONSTRAINED  transformOptions:{fit:CONTAIN})}}
             }}
         }`);
 
@@ -27,9 +27,9 @@ const PhotoGallery = () =>{
                 date: "2024-07-15",
               },
         ];
-        console.log(data);
+       
         return (
-            <div style = {{display:"flex",flexWrap:"wrap"}}>
+            <div style = {{display:"flex",flexWrap:"wrap", width:"100vw",marginLeft:"-100%",justifyContent:"center"}}>
                 {data.allFile.edges.map(({ node }) => {
         const imageData = getImage(node);
         const photo = photos.find((p) => p.name === node.name);

@@ -1,0 +1,47 @@
+.postListContainer {
+    margin-top: 2rem;
+  }
+  
+  .postListTitle {
+    font-size: 1.8rem;
+    color: var(--text-color-secondary);
+    margin-bottom: 1rem;
+  }
+  
+  .postList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .postItem {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+  }
+  
+  .postItem:last-child {
+    border-bottom: none;
+  }
+  
+  .postLink {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .postTitle {
+    font-size: 1.4rem;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .postDate {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .postExcerpt {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.5;
+  }

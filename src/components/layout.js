@@ -30,9 +30,12 @@ const NavLinks = styled.nav`
   justify-content: center;
   background: linear-gradient(to bottom, rgba(18, 18, 18, 1),rgba(18, 18, 18,1),rgba(18, 18, 18, 1),rgba(18, 18, 18, 0.8),rgba(18, 18, 18, 0));
   position: sticky;
-  top: ${props => (props.isHomePage ? '0' : '10px')};
+  top: ${props => (props.isHomePage ? '0' : '0px')};
   left: ${props => (props.isHomePage ? '0' : '10px')};
-  justify-content: ${props => (props.isHomePage ? 'center' : 'flex-start')};
+  width:100vw;
+  justify-content: ${props => (props.isHomePage ? 'center' : 'center')};
+  margin-left: calc(50% - 50vw);
+  z-index:2;
   --translate-distance: 10px;
 
 `;
@@ -97,9 +100,7 @@ const NavLink = styled(Link)`
 const Content = styled.div`
   text-align: left;
   margin-top: 40px;
-  display:flex;
-  flex-direction:column;
-  flex:1;
+  min-height: calc(100vh - 233px);
 `;
 const FooterContainer = styled.footer`
 
