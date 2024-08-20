@@ -25,6 +25,7 @@ module.exports = {
     },
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp-exif',
     
     {
       resolve: 'gatsby-transformer-remark',

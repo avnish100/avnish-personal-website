@@ -5,7 +5,7 @@ import PhotoGallery from "../components/PhotoGallery"
 const PhotosPage = () => {
   return (
     <Layout pageTitle="Photos">
-      <p>SOme text</p>
+      <p>Some of my favourite pictures</p>
       <PhotoGallery/>
     </Layout>
   )

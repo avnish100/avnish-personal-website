@@ -1,52 +1,101 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import {GatsbyImage, getImage} from "gatsby-plugin-image";
+import styled from "styled-components";
+const GalleryWrapper = styled.div`
+  
+  color: #fff;
+  padding: 20px;
+`
 
-const PhotoGallery = () =>{
-    const data = useStaticQuery(graphql`
-        query{
-        allFile(filter : {sourceInstanceName: { eq: "images" }, extension: { regex: "/(jpg|jpeg|png)/" } }){
-        edges{
-            node{
-            id
+const YearSection = styled.div`
+  margin-bottom: 40px;
+`
+
+const YearTitle = styled.h2`
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: var(--text-color-primary);
+`
+
+const ImageGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+`
+
+const ImageItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  &:nth-child(3n+1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+`
+
+const ImageCaption = styled.div`
+  padding: 8px 0;
+  font-size: 12px;
+  color: var(--text-color-secondary);
+
+`
+
+const PhotoGallery = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allFile(
+        filter: { sourceInstanceName: { eq: "images" } }
+        sort: { fields: name, order: ASC }
+      ) {
+        edges {
+          node {
             name
-            childImageSharp{
-                gatsbyImageData(layout: CONSTRAINED  transformOptions:{fit:CONTAIN})}}
-            }}
-        }`);
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+        }
+      }
+    }
+  `)
 
-        const photos = [
-            {
-                name: "image1",
-                location: "Paris, France",
-                date: "2024-08-10",
-              },
-              {
-                name: "image2",
-                location: "New York, USA",
-                date: "2024-07-15",
-              },
-        ];
-       
-        return (
-            <div style = {{display:"flex",flexWrap:"wrap", width:"100vw",marginLeft:"-100%",justifyContent:"center"}}>
-                {data.allFile.edges.map(({ node }) => {
-        const imageData = getImage(node);
-        const photo = photos.find((p) => p.name === node.name);
-        return (
-          <div key={node.id} style={{ margin: "10px"}}>
-            <GatsbyImage image={imageData} alt={node.name}/>
-            {photo && (
-              <div>
-                <p>{photo.location}</p>
-                <p>{photo.date}</p>
-              </div>
-            )}
-          </div>
-        );
-      })}
-            </div>
-        )
-};
+  // Assume image names are in format: YYYY-MM-DD_Caption.jpg
+  const images = data.allFile.edges.map(({ node }) => {
+    const [date, ...captionParts] = node.name.split('_')
+    const [year, month, day] = date.split('-')
+    return {
+      year,
+      date: `${month}.${day}.${year}`,
+      caption: captionParts.join(' ').replace('.jpg', ''),
+      image: getImage(node)
+    }
+  })
+
+  // Group images by year
+  const groupedImages = images.reduce((acc, img) => {
+    (acc[img.year] = acc[img.year] || []).push(img)
+    return acc
+  }, {})
+
+  return (
+    <GalleryWrapper>
+      {Object.entries(groupedImages).map(([year, yearImages]) => (
+        <YearSection key={year}>
+          <YearTitle>{year}</YearTitle>
+          <ImageGrid>
+            {yearImages.map((img, index) => (
+              <ImageItem key={index}>
+                <GatsbyImage image={img.image} alt={img.caption} />
+                <ImageCaption>
+                  {img.caption} — {img.date}
+                </ImageCaption>
+              </ImageItem>
+            ))}
+          </ImageGrid>
+        </YearSection>
+      ))}
+    </GalleryWrapper>
+  )
+}
 
 export default PhotoGallery;

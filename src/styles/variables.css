@@ -5,7 +5,8 @@
     --text-color-secondary:#979797;
     -text-color-accent:#8ea0ff;
     --highlight-color:#8ea0ff;
-    --secondary-font: 'Switzer-Regular', 'Open Sans', 'Helvetica Neue', sans-serif;/* Keep the same or change as needed */
+    --secondary-font: 'Switzer-Regular', 'Open Sans', 'Helvetica Neue', sans-serif;
+    --background-navbar: linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 1), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));/* Keep the same or change as needed */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +17,7 @@
       --highlight-color:#bb86fc;; /* Keep the same or change as needed */
       --nav-background: #1f1f1f;
       --nav-text-color: #e0e0e0;
+      --background-navbar: linear-gradient(to bottom, rgba(18, 18, 18, 1),rgba(18, 18, 18,1),rgba(18, 18, 18, 1),rgba(18, 18, 18, 0.8),rgba(18, 18, 18, 0));
     }
   }
   

@@ -24,6 +24,7 @@
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-plugin-sharp-exif": "^2.0.0",
     "gatsby-plugin-styled-components": "^6.13.1",
     "gatsby-remark-images": "^7.13.1",
     "gatsby-source-filesystem": "^5.13.1",

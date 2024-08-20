@@ -28,14 +28,14 @@ const NavLinks = styled.nav`
   margin: 20px 0;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to bottom, rgba(18, 18, 18, 1),rgba(18, 18, 18,1),rgba(18, 18, 18, 1),rgba(18, 18, 18, 0.8),rgba(18, 18, 18, 0));
+  background: var(--background-navbar);
   position: sticky;
   top: ${props => (props.isHomePage ? '0' : '0px')};
   left: ${props => (props.isHomePage ? '0' : '10px')};
   width:100vw;
   justify-content: ${props => (props.isHomePage ? 'center' : 'center')};
   margin-left: calc(50% - 50vw);
-  z-index:2;
+  
   --translate-distance: 10px;
 
 `;
@@ -112,7 +112,7 @@ const FooterContainer = styled.footer`
   left: 0;
   padding: 10px 0;
   height: 60px; /* Make sure this matches the LayoutContainer's padding-bottom */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  
  
 `
 

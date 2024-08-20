@@ -1,0 +1,42 @@
+/* ImageGallery.module.css */
+.galleryContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .yearGroup {
+    margin-bottom: 40px;
+  }
+  
+  .yearTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .imageContainer {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .caption {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 8px;
+  }

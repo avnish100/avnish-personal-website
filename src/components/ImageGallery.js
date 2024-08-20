@@ -19,7 +19,7 @@ const ImageGallery = () => {
               gatsbyImageData(
                 layout: CONSTRAINED
                 
-                
+                width: 400
                 transformOptions: { fit: CONTAIN }
               )
             }
