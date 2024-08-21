@@ -18,8 +18,8 @@ const ImageGallery = () => {
             childImageSharp {
               gatsbyImageData(
                 layout: CONSTRAINED
-                
-                width: 400
+                width:300
+                aspectRatio:1.5
                 transformOptions: { fit: CONTAIN }
               )
             }
@@ -50,7 +50,7 @@ const ImageGallery = () => {
       {shuffledImages.length > 0 ? (
         shuffledImages.map(({ node: image }) => {
           const img = getImage(image.childImageSharp);
-          return <GatsbyImage key={image.id} image={img} alt={image.name} width={250}/>;
+          return <GatsbyImage key={image.id} image={img} alt={image.name}/>;
         })
       ) : (
         <p>No images found.</p>

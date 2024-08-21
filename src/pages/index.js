@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '../components/layout';
 import styled from 'styled-components';
 import { graphql,Link } from 'gatsby';
-import SpotifyAlbums from '../components/spotifyAlbums';
 import ImageGallery from '../components/ImageGallery';
 
 const images = [
@@ -29,13 +28,10 @@ const IndexPage = ({data}) => (
           <span>2023-Present</span>
         </ExperienceItem>
         <ExperienceItem>
-          <span>Some personal project</span>
+          <span>Zebra Technologies</span>
           <span>2023</span>
         </ExperienceItem>
-        <ExperienceItem>
-          <span>Another personal project</span>
-          <span>2023</span>
-        </ExperienceItem>
+        
       </ExperienceContainer>
       <ImageGallery images={images} />
     </Container>
@@ -64,7 +60,7 @@ const ExperienceItem = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
   text-align: left;

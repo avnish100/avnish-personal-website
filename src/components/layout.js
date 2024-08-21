@@ -35,7 +35,7 @@ const NavLinks = styled.nav`
   width:100vw;
   justify-content: ${props => (props.isHomePage ? 'center' : 'center')};
   margin-left: calc(50% - 50vw);
-  
+  z-index:2;
   --translate-distance: 10px;
 
 `;
@@ -48,6 +48,7 @@ const NavLink = styled(Link)`
   position: relative;
   display: inline-block;
   padding: 10px;
+  
 
   &::after {
     content: '';

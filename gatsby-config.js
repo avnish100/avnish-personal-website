@@ -26,7 +26,7 @@ module.exports = {
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp-exif',
-    
+    `gatsby-transformer-json`,
     {
       resolve: 'gatsby-transformer-remark',
       options: {
@@ -46,6 +46,13 @@ module.exports = {
           defaults:{
           backgroundColor: 'transparent',}
         }
-      }
+      },
+      {
+        resolve: `gatsby-source-filesystem`,
+        options: {
+          path: `${__dirname}/src/data`,
+      },
+    }
+      
   ]
 }

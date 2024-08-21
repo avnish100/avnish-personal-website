@@ -30,13 +30,13 @@
   
   .postTitle {
     font-size: 1.4rem;
-    color: #e0e0e0;
+    color: var(--text-color-primary);
     margin-bottom: 0.5rem;
   }
   
   .postDate {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-color-secondary);;
     margin-bottom: 0.5rem;
   }
   

@@ -1,0 +1,13 @@
+[
+    {
+      "title": "Project 1",
+      "date": "2023-05-15",
+      "repoUrl": "https://github.com/rsms/estrella",
+      "hostedUrl": "https://project1.com"
+    },
+    {
+      "title": "Project 2",
+      "date": "2023-03-01",
+      "repoUrl": "https://github.com/yourusername/project2"
+    }
+  ]
