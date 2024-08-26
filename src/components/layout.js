@@ -20,8 +20,10 @@ const ProfileImage = styled.img`
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  transform: rotate(-10deg);
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const NavLinks = styled.nav`
@@ -37,6 +39,11 @@ const NavLinks = styled.nav`
   margin-left: calc(50% - 50vw);
   z-index:2;
   --translate-distance: 10px;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding: 10px 0;
+  }
 
 `;
 
@@ -94,6 +101,13 @@ const NavLink = styled(Link)`
     opacity: 1;
   }
 
+  @media (max-width: 768px) {
+    margin: 0 10px;
+    padding: 5px;
+
+    &::after, svg {
+      display: none;
+    }
    
   
 `;
@@ -126,6 +140,10 @@ const FooterLinks = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+  }
   
 `
 
@@ -144,6 +162,17 @@ const FooterText = styled.p`
     color: var(--text-color-secondary);
 
 `
+const ResponsiveImageWrapper = styled.div`
+  margin-left: 350px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 150px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 
 
 const Layout = ({ children }) => {
@@ -166,21 +195,21 @@ const Layout = ({ children }) => {
     <div>
       <GlobalStyle/>
     <Container>
-      {isHomePage && <StaticImage
-      src="https://pbs.twimg.com/profile_images/1822997090118623233/AG-a48wO_400x400.jpg"
-      alt="A dinosaur"
-      placeholder="blurred"
-      layout="fixed"
-      width = {150}
-      height={150}
-      objectFit="cover"
-      style = {{marginLeft:"350px"}}
-      imgStyle={{borderRadius: "50%",
-        objectFit: "cover",
-      
-        marginBottom: "20px"}}
-      
-    />}
+      {isHomePage && <ResponsiveImageWrapper>
+          <StaticImage
+          src="https://pbs.twimg.com/profile_images/1822997090118623233/AG-a48wO_400x400.jpg"
+          alt="Profile"
+          placeholder="blurred"
+          layout="fixed"
+          width={150}
+          height={150}
+          objectFit="cover"
+          imgStyle={{
+            borderRadius: "50%",
+            objectFit: "cover",
+          }}
+          
+        /></ResponsiveImageWrapper>}
       <NavLinks isHomePage={isHomePage}>
       <NavLink to="/" activeClassName="activeFirst" className='nav-link'>Home<ArrowIcon/></NavLink>
         <NavLink to="/writing" activeClassName="active" className='nav-link'>Writing <ArrowIcon/></NavLink>
