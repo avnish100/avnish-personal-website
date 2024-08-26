@@ -1,13 +1,14 @@
 [
     {
-      "title": "Project 1",
+      "title": "WebRTC Chat",
       "date": "2023-05-15",
-      "repoUrl": "https://github.com/rsms/estrella",
-      "hostedUrl": "https://project1.com"
+      "repoUrl": "https://github.com/avnish100/webrtc-chat"
+      
     },
     {
-      "title": "Project 2",
+      "title": "My Website",
       "date": "2023-03-01",
-      "repoUrl": "https://github.com/yourusername/project2"
+      "repoUrl": "https://github.com/avnish100/avnish-personal-website",
+      "hostedUrl":"avnishjha.netlify.app"
     }
   ]

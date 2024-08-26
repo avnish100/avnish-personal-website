@@ -1,47 +1,81 @@
 import React from 'react';
 import Layout from '../components/layout';
 import styled from 'styled-components';
-import { graphql,Link } from 'gatsby';
-import ImageGallery from '../components/ImageGallery';
+import { graphql, Link } from 'gatsby';
+import { motion } from 'framer-motion';
 
-const images = [
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 1' },
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 2' },
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 3' },
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 4' },
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 5' },
-  { src: 'https://images.pexels.com/photos/27439406/pexels-photo-27439406/free-photo-of-a-cup-of-coffee-sits-on-a-bed-with-pillows.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', alt: 'Image 6' },
-];
-const IndexPage = ({data}) => (
-  
-  <Layout>
-<Container>
-<IntroText>
-        <p>I'm Avnish Jha, a 22 year old engineer, currently working at Deloitte.</p>
-        <p>
-          Welcome to my side of the internet. Here are a few quick <Link to="#">links</Link> to help you get around the site. </p><p>I am an engineer, interested in how the world works and taking <Link to="#">photos</Link> along the way. I enjoy building, reading, running and cars (thank you Top Gear) and anything shiny that catches my eye.
-        </p>
-      </IntroText>
-      <ExperienceContainer>
-        <ExperienceItem>
-          <span>Deloitte</span>
-          <span>2023-Present</span>
-        </ExperienceItem>
-        <ExperienceItem>
-          <span>Zebra Technologies</span>
-          <span>2023</span>
-        </ExperienceItem>
-        
-      </ExperienceContainer>
-      <ImageGallery images={images} />
-    </Container>
-  </Layout>
-);
+const IndexPage = ({ data }) => {
+  const recentPosts = data.allMarkdownRemark.edges.slice(0, 5);
+
+  return (
+    <Layout>
+      <Container>
+        <IntroText>
+          <p>I'm Avnish Jha, a 22 year old engineer, currently working at Deloitte.</p>
+          <p>
+            Welcome to my side of the internet. Here are a few quick <Link to="#">links</Link> to help you get around the site.
+          </p>
+          <p>
+            I am an engineer, interested in how the world works and taking <Link to="#">photos</Link> along the way. I enjoy building, reading, running and cars (thank you Top Gear) and anything shiny that catches my eye.
+          </p>
+        </IntroText>
+        <ExperienceContainer>
+          <ExperienceItem
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span style={{ color: 'var(--text-color-secondary)' }}>Deloitte</span>
+            <span style={{ color: 'var(--text-color-secondary)' }}>2023-Present</span>
+          </ExperienceItem>
+          <ExperienceItem
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <span style={{ color: 'var(--text-color-secondary)' }}>Zebra Technologies</span>
+            <span style={{ color: 'var(--text-color-secondary)' }}>2023</span>
+          </ExperienceItem>
+        </ExperienceContainer>
+        <RecentPostsContainer>
+          <h2 style={{ color: 'var(--text-color-primary)' }}>Recent Blog Posts</h2>
+          <PostList>
+            {recentPosts.map(({ node }, index) => (
+              <PostItem
+                key={node.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Link to={node.fields.slug} style={{ textDecoration: 'none' }}>
+                  <h3 style={{ color: 'var(--text-color-primary)' }}>{node.frontmatter.title}</h3>
+                  <p style={{ color: 'var(--text-color-secondary)', marginBottom: '8px' }}>
+                    {node.frontmatter.date}
+                  </p>
+                  {node.frontmatter.tags && (
+                    <TagList>
+                      {node.frontmatter.tags.map((tag, index) => (
+                        <Tag key={index} style={{ color: 'var(--text-color-primary)' }}>
+                          #{tag}
+                        </Tag>
+                      ))}
+                    </TagList>
+                  )}
+                </Link>
+              </PostItem>
+            ))}
+          </PostList>
+        </RecentPostsContainer>
+      </Container>
+    </Layout>
+  );
+};
 
 const IntroText = styled.div`
   text-align: left;
   margin-bottom: 40px;
   font-family: var(--secondary-font);
+  color: var(--text-color-primary);
 `;
 
 const ExperienceContainer = styled.div`
@@ -49,14 +83,12 @@ const ExperienceContainer = styled.div`
   text-align: left;
 `;
 
-const ExperienceItem = styled.div`
+const ExperienceItem = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   padding: 20px 0 20px 0;
   border-bottom: 1px solid var(--text-color-secondary);
-  
   transition: transform 0.3s ease;
-  
 `;
 
 const Container = styled.div`
@@ -64,6 +96,48 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 20px;
   text-align: left;
+`;
+
+const RecentPostsContainer = styled.div`
+  margin-top: 40px;
+  text-align: left;
+`;
+
+const PostList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const PostItem = styled(motion.li)`
+  padding: 20px 0;
+  border-bottom: 1px solid var(--text-color-secondary);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateX(5px);
+  }
+`;
+
+const TagList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+`;
+
+const Tag = styled.span`
+  background-color: var(--text-color-secondary);
+  color: var(--text-color-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--text-color-primary);
+    color: var(--text-color-secondary);
+  }
 `;
 
 export const query = graphql`
