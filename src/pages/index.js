@@ -47,20 +47,21 @@ const IndexPage = ({ data }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Link to={node.fields.slug} style={{ textDecoration: 'none' }}>
+                <Link to={node.fields.slug} style={{ textDecoration: 'none', display: 'block' }}>
                   <h3 style={{ color: 'var(--text-color-primary)' }}>{node.frontmatter.title}</h3>
-                  <p style={{ color: 'var(--text-color-secondary)', marginBottom: '8px' }}>
-                    {node.frontmatter.date}
-                  </p>
-                  {node.frontmatter.tags && (
-                    <TagList>
-                      {node.frontmatter.tags.map((tag, index) => (
-                        <Tag key={index} style={{ color: 'var(--text-color-primary)' }}>
-                          #{tag}
-                        </Tag>
-                      ))}
-                    </TagList>
-                  )}
+                  <Excerpt>{node.excerpt}</Excerpt>
+                  <MetaContainer>
+                    {node.frontmatter.tags && (
+                      <TagList>
+                        {node.frontmatter.tags.map((tag, index) => (
+                          <Tag key={index} style={{ color: 'var(--text-color-primary)' }}>
+                            {tag}
+                          </Tag>
+                        ))}
+                      </TagList>
+                    )}
+                    <Date>{node.frontmatter.date}</Date>
+                  </MetaContainer>
                 </Link>
               </PostItem>
             ))}
@@ -118,10 +119,22 @@ const PostItem = styled(motion.li)`
   }
 `;
 
+const Excerpt = styled.p`
+  color: var(--text-color-secondary);
+  margin-bottom: 8px;
+`;
+
+const MetaContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 8px;
+`;
+
 const TagList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-right: 16px;
 `;
 
 const Tag = styled.span`
@@ -130,7 +143,6 @@ const Tag = styled.span`
   padding: 4px 8px;
   border-radius: 4px;
   margin-right: 8px;
-  margin-bottom: 8px;
   font-size: 0.875rem;
   transition: background-color 0.3s ease;
 
@@ -140,12 +152,18 @@ const Tag = styled.span`
   }
 `;
 
+const Date = styled.span`
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+`;
+
 export const query = graphql`
   query {
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id
+          excerpt(pruneLength: 150)
           frontmatter {
             title
             date(formatString: "MMMM DD, YYYY")
