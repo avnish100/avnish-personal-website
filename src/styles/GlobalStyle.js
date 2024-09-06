@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;  
     background-color: var(--background-color);
     color:var(--text-color-primary);
-    font-family: 'Switzer-Semibold', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Switzer-Regular', 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 `
 

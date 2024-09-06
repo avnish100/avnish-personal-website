@@ -25,6 +25,7 @@ const WritingPage = ({ data, location }) => {
     <Layout>
       <div className={styles.writingContainer}>
         <h1 className={styles.pageTitle}>Writing</h1>
+        <p>Here you will find a collection of my writings. An attempt to work with the garage door up <a href="https://notes.andymatuschak.org/Work_with_the_garage_door_up">see</a></p>
         <TagPills tags={tags} selectedTag={selectedTag} />
         <RecentPosts posts={filteredPosts} />
       </div>

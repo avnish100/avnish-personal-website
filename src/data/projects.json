@@ -1,14 +1,20 @@
 [
     {
       "title": "WebRTC Chat",
-      "date": "2023-05-15",
+      "date": "2024-05-15",
       "repoUrl": "https://github.com/avnish100/webrtc-chat"
       
     },
     {
       "title": "My Website",
-      "date": "2023-03-01",
+      "date": "2024-03-01",
       "repoUrl": "https://github.com/avnish100/avnish-personal-website",
       "hostedUrl":"https://avnishjha.netlify.app/"
+    },
+    {
+      "title": "autodeps",
+      "date": "2024-04-09",
+      "repoUrl":"https://github.com/avnish100/autodeps",
+      "hostedUrl":"https://www.npmjs.com/package/@avnish100/autodeps"
     }
   ]

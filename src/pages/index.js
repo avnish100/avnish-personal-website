@@ -1,8 +1,9 @@
 import React from 'react';
 import Layout from '../components/layout';
 import styled from 'styled-components';
-import { graphql, Link } from 'gatsby';
+import { graphql, Link} from 'gatsby';
 import { motion } from 'framer-motion';
+import { ExternalLink } from 'react-feather';
 
 const IndexPage = ({ data }) => {
   const recentPosts = data.allMarkdownRemark.edges.slice(0, 5);
@@ -13,10 +14,10 @@ const IndexPage = ({ data }) => {
         <IntroText>
           <p>I'm Avnish Jha, a 22 year old engineer, currently working at Deloitte.</p>
           <p>
-            Welcome to my side of the internet. Here are a few quick <Link to="#">links</Link> to help you get around the site.
+            Welcome to my side of the internet. Here are a few quick <StyledLink to="photos" target="_blank" rel="noopener noreferrer">links <ExternalLink size={16}></ExternalLink></StyledLink> to help you get around the site.
           </p>
           <p>
-            I am an engineer, interested in how the world works and taking <Link to="#">photos</Link> along the way. I enjoy building, reading, running and cars (thank you Top Gear) and anything shiny that catches my eye.
+            I am an engineer, interested in how the world works and taking <StyledLink to="photos" target="_blank" rel="noopener noreferrer">photos <ExternalLink size={16}></ExternalLink></StyledLink> along the way. I enjoy building, reading, running and cars (thank you Top Gear) and anything shiny that catches my eye.
           </p>
         </IntroText>
         <ExperienceContainer>
@@ -37,8 +38,10 @@ const IndexPage = ({ data }) => {
             <span style={{ color: 'var(--text-color-secondary)' }}>2023</span>
           </ExperienceItem>
         </ExperienceContainer>
+        
         <RecentPostsContainer>
           <h2 style={{ color: 'var(--text-color-primary)' }}>Recent Blog Posts</h2>
+          <div>Here you can find a few of my recent posts</div>
           <PostList>
             {recentPosts.map(({ node }, index) => (
               <PostItem
@@ -155,6 +158,22 @@ const Tag = styled.span`
 const Date = styled.span`
   color: var(--text-color-secondary);
   font-size: 0.875rem;
+`;
+
+const StyledLink = styled(Link)`
+  align-items: center;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+
+  svg {
+    margin-right: 5px;
+  }
 `;
 
 export const query = graphql`
