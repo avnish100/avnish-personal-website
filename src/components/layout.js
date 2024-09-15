@@ -41,7 +41,7 @@ const NavLinks = styled.nav`
   --translate-distance: 10px;
 
   @media (max-width: 768px) {
-    justify-content: flex-start;
+    justify-content: center;
     padding: 10px 0;
   }
 
