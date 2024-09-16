@@ -26,7 +26,7 @@ const ProjectsGrid = styled.div`
 const ProjectCard = styled(motion.div)`
   border: 1px solid var(--text-color-secondary);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
 `;
 

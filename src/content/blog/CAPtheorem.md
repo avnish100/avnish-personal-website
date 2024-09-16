@@ -1,12 +1,12 @@
 ---
 title: "What is CAP Theorem"
 date: "2024-09-03"
-tags: ["Distributed Systems"]
+tags: ["Distributed Systems","Theory"]
 ---
 
 # Understanding the CAP Theorem: A Friendly Guide with Analogies
 
-This is my attempt at explaining CAP theorem as an analogy after all the biggest indicator of knowledge is wether we can break the concept down and make it easily understandable to everyone. This is going to be the part of my series of explanations of key distributed systems concepts and i aim to explain as i go on learning these concepts. Big shoutout to [mwhittaker.github.io](mwhittaker.github.io) for the beautiful proof see [Proof](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/)
+This is my attempt at explaining CAP theorem as an analogy after all the biggest indicator of knowledge is wether we can break the concept down and make it easily understandable to everyone. This is going to be the part of my series of explanations of key distributed systems concepts and i aim to explain as i go on learning these concepts. Big shoutout to [mwhittaker.github.io](https://mwhittaker.github.io) for the beautiful proof see [Proof](https://mwhittaker.github.io/blog/an_illustrated_proof_of_the_cap_theorem/)
 
 ## The CAP Theorem: The Basics
 
@@ -21,6 +21,7 @@ The CAP theorem, also known as Brewer's theorem, states that in a distributed da
 In essence, the theorem argues that in the case of a network partition, you have to choose between consistency and availability.
 
 ![Cap Theorem](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/CAP_Theorem_Venn_Diagram.png/220px-CAP_Theorem_Venn_Diagram.png)
+
 
 ## The Analogy: Welcome to CAP High School!
 

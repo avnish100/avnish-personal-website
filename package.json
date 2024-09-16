@@ -29,6 +29,7 @@
     "gatsby-plugin-sharp": "^5.13.1",
     "gatsby-plugin-sharp-exif": "^2.0.0",
     "gatsby-plugin-styled-components": "^6.13.1",
+    "gatsby-remark-classes": "^1.0.2",
     "gatsby-remark-images": "^7.13.1",
     "gatsby-source-filesystem": "^5.13.1",
     "gatsby-transformer-json": "^5.13.1",
@@ -41,6 +42,7 @@
     "react-force-graph": "^1.44.4",
     "react-force-graph-3d": "^1.24.3",
     "react-helmet": "^6.1.0",
+    "remark-html": "^16.0.1",
     "styled-components": "^6.1.12",
     "three": "^0.168.0"
   }

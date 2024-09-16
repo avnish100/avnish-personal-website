@@ -39,7 +39,7 @@ const IndexPage = ({ data }) => {
           </SocialLink>
         </SocialLinks>
 
-        <CTAButton>Let's Collaborate</CTAButton>
+        <CTAButton><a href="mailto:avnishjha1005@gmail.com" style={{textDecoration : 'none',color: 'inherit'}}>Let's Collaborate</a></CTAButton>
         <ExperienceContainer>
           <ExperienceItem
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ const IndexPage = ({ data }) => {
         </ExperienceContainer>
         
         <RecentPostsContainer>
-          <h2 style={{ color: 'var(--text-color-primary)' }}>Recent Blog Posts</h2>
+          <h2 style={{ color: 'var(--text-color-primary)',fontSize: '2rem' }}>Recent Blog Posts</h2>
           <div>Here you can find a few of my recent posts</div>
           <PostList>
             {recentPosts.map(({ node }, index) => (
@@ -77,13 +77,13 @@ const IndexPage = ({ data }) => {
                     {node.frontmatter.tags && (
                       <TagList>
                         {node.frontmatter.tags.map((tag, index) => (
-                          <Tag key={index} style={{ color: 'var(--text-color-primary)' }}>
+                          <Tag key={index} >
                             {tag}
                           </Tag>
                         ))}
                       </TagList>
                     )}
-                    <Date>{node.frontmatter.date}</Date>
+                    <Date>{node.frontmatter.date}</Date>  
                   </MetaContainer>
                 </Link>
               </PostItem>
@@ -199,6 +199,8 @@ const PostItem = styled(motion.li)`
 
   &:hover {
     transform: translateX(5px);
+
+
   }
 `;
 
@@ -221,18 +223,13 @@ const TagList = styled.div`
 `;
 
 const Tag = styled.span`
-  background-color: var(--text-color-secondary);
-  color: var(--text-color-primary);
+  background-color: var(--tag-background);
+  color: var(--tag-text);
   padding: 4px 8px;
   border-radius: 4px;
   margin-right: 8px;
   font-size: 0.875rem;
   transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: var(--text-color-primary);
-    color: var(--text-color-secondary);
-  }
 `;
 
 const Date = styled.span`
@@ -284,7 +281,7 @@ const WorkItem = styled(motion.li)`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow:  0 0px 10px 5px var(--text-color-secondary);
   }
 `;
 
@@ -311,7 +308,7 @@ const TechList = styled.div`
 `;
 
 const TechItem = styled.span`
-  background-color: var(--text-color-secondary);
+  background-color: var(--text-color-primary);
   color: var(--background-color);
   padding: 4px 8px;
   border-radius: 4px;
