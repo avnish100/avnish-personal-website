@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import { graphql, Link} from 'gatsby';
 import { motion } from 'framer-motion';
 import { Twitter, Linkedin, Github} from 'lucide-react';
-import { ExternalLink } from 'react-feather';
+import { ExternalLink, GitHub as Gh} from 'react-feather';
+
 
 const IndexPage = ({ data }) => {
   const recentPosts = data.allMarkdownRemark.edges.slice(0, 5);
   const selectedWorks = [
-    { title: 'WebRTC Chat Application', description: 'Simple Chat application that lets you enter a room and chat with participants', technologies: ['NextJS', 'WebRTC', 'PostgreSQL'] },
+    { title: 'WebRTC Chat Application', description: 'Simple Chat application that lets you enter a room and chat with participants', technologies: ['NextJS', 'WebRTC', 'PostgreSQL'],   repoUrl: "https://github.com/avnish100/webrtc-chat"},
     { title: 'cmsync', description: 'Automation Script to sync local images folder and your CMS', technologies: ['python', 'CMS', 'Sanity'] },
   ];
 
   return (
     <Layout>
-      <Container>
+      
         <IntroText>
           <h1>Hey there, I am Avnish Jha</h1>
           <p>
@@ -107,16 +108,52 @@ const IndexPage = ({ data }) => {
                     {work.technologies.map((tech, techIndex) => (
                       <TechItem key={techIndex}>{tech}</TechItem>
                     ))}
+
+                <ProjectLinks>
+                <ProjectLink href={work.repoUrl} target="_blank" rel="noopener noreferrer">
+                  <Gh size={16} /> GitHub
+                </ProjectLink>
+                {work.hostedUrl && (
+                  <ProjectLink href={work.hostedUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink size={16} /> Live Demo
+                  </ProjectLink>
+                )}
+                </ProjectLinks>
                   </TechList>
+                  
                 </WorkContent>
+                
               </WorkItem>
             ))}
           </WorkList>
         </SelectedWorkContainer>
-      </Container>
+      
     </Layout>
   );
 };
+
+const ProjectLinks = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+`;
+
+const ProjectLink = styled.a`
+  display: flex;
+  align-items: center;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--text-color-primary);
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+`;
 const SocialLinks = styled.div`
   display: flex;
   justify-content: center;
@@ -282,6 +319,12 @@ const WorkItem = styled(motion.li)`
   &:hover {
     transform: translateY(-5px);
     box-shadow:  0 0px 10px 5px var(--text-color-secondary);
+  }
+  @media(max-width:768px){
+   &:hover{
+   translateY(-5px);
+   box-shadow:  none;
+   }
   }
 `;
 

@@ -41,7 +41,7 @@ const NavLinks = styled.nav`
   --translate-distance: 10px;
 
   @media (max-width: 768px) {
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 10px 0;
   }
 
@@ -104,6 +104,7 @@ const NavLink = styled(Link)`
   @media (max-width: 768px) {
     margin: 0 10px;
     padding: 5px;
+    
 
     &::after, svg {
       display: none;

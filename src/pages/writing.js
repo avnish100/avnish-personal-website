@@ -4,6 +4,7 @@ import Layout from '../components/layout'
 import TagPills from '../components/TagPills'
 import PostList from '../components/RecentPosts'
 import * as styles from './writing.module.css'
+import { ExternalLink } from 'lucide-react'
 import RecentPosts from '../components/RecentPosts'
 
 const WritingPage = ({ data, location }) => {
@@ -25,7 +26,7 @@ const WritingPage = ({ data, location }) => {
     <Layout>
       <div className={styles.writingContainer}>
         <h1 className={styles.pageTitle}>Writing</h1>
-        <p>Here you will find a collection of my writings. An attempt to work with the garage door up <a href="https://notes.andymatuschak.org/Work_with_the_garage_door_up">see</a></p>
+        <p>Here you will find a collection of my writings. An attempt to work with the garage door up <a href="https://notes.andymatuschak.org/Work_with_the_garage_door_up" style={{textDecoration:'none', color: 'var(--text-color-secondary)'}}>see <ExternalLink size={16}></ExternalLink></a></p>
         <TagPills tags={tags} selectedTag={selectedTag} />
         <RecentPosts posts={filteredPosts} />
       </div>
