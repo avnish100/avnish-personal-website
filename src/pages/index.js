@@ -11,7 +11,7 @@ const IndexPage = ({ data }) => {
   const recentPosts = data.allMarkdownRemark.edges.slice(0, 5);
   const selectedWorks = [
     { title: 'WebRTC Chat Application', description: 'Simple Chat application that lets you enter a room and chat with participants', technologies: ['NextJS', 'WebRTC', 'PostgreSQL'],   repoUrl: "https://github.com/avnish100/webrtc-chat"},
-    { title: 'cmsync', description: 'Automation Script to sync local images folder and your CMS', technologies: ['python', 'CMS', 'Sanity'] },
+    { title: 'Bel Bullets Run Club', description: 'Run club website with leaderboard, event signup and personalised goals', technologies: ['NextJS', 'Supabase', 'Framer Motion'], hostedUrl: "https://www.belbullets.run"},
   ];
 
   return (
